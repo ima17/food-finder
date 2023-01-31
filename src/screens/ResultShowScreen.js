@@ -7,6 +7,7 @@ import {
   Image,
   SafeAreaView,
   ActivityIndicator,
+  ScrollView,
 } from "react-native";
 import Yelp from "../api/Yelp";
 
@@ -32,13 +33,18 @@ const ResultShowScreen = ({ route }) => {
   }
 
   return (
-    <View>
-      <Text>{result.name}</Text>
+    <View style={style.container}>
+      <Text style={style.textStyle}>{result.name}</Text>
       <FlatList
         data={result.photos}
+        scrollIndicatorInsets={false}
         keyExtractor={(photo) => photo}
         renderItem={({ item }) => {
-          return <Image style={style.image} source={{ uri: item }} />;
+          return (
+            <ScrollView contentContainerStyle={style.imageContainer}>
+              <Image style={style.image} source={{ uri: item }} />
+            </ScrollView>
+          );
         }}
       />
     </View>
@@ -46,12 +52,22 @@ const ResultShowScreen = ({ route }) => {
 };
 
 const style = StyleSheet.create({
+  container: {
+    margin: 15,
+  },
+  imageContainer: {
+    marginBottom: 15,
+  },
   image: {
     height: 200,
     width: 300,
   },
   indicator: {
     marginTop: 100,
+  },
+  textStyle: {
+    fontSize: 15,
+    fontWeight: "bold",
   },
 });
 

@@ -10,6 +10,10 @@ import ResultDetails from "./ResultDetails";
 import { withNavigation } from "@react-navigation/compat";
 
 const ResultList = ({ title, result, navigation }) => {
+  if (!result.length) {
+    return null;
+  }
+
   return (
     <View style={style.conatiner}>
       <Text style={style.title}>{title}</Text>
